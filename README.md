@@ -16,6 +16,7 @@ ConsoleMusix currently supports:
 ![Robin Hustin x Tobimorrow - Light it Up (NCS)](https://github.com/Eimaen/ConsoleMusix/blob/master/Screenshot.png)
 
 ## TODO
+* Playlists!
 * ~Make~ Fix Discord party join to listen together with friends
 * Try to fasten console I/O
 * Redesign of controls *(btw they look like shit now)*
@@ -29,6 +30,10 @@ ConsoleMusix currently supports:
 Musixmatch API is unofficial and **is stolen** from original Musixmatch app for PC. Currently it uses my Musixmatch user-token.
 Of course I don't know if downloading from Soundcloud is a legal thing.
 I published it just **for educational purposes**.
+
+## Known bugs
+* When the second song per launch is opened and it contains lyrics, program returns to the main menu loop, but doesn't dispose `SoundOutput`. It makes it kinda stuck.
+* Soundcloud download works good, but not always. Some songs aren't currently downloadable. For those ones you can use YouTube.
 
 #### Your CPU must be fast enough to render console visualization and prevent FPS drops. 
 

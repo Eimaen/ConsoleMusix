@@ -8,15 +8,29 @@ ConsoleMusix currently supports:
 * Musixmatch **Unofficial** lyrics API
 * Direct download from Soundcloud / Youtube
 * Music waveform visualization
-* Perfect console interface *(and supports mouse ¯\\\_(ツ)\_/¯)*
+* Perfect console interface *(supports mouse ¯\\\_(ツ)\_/¯ but can work without it)*
 
 ## Screenshot
+*On screenshot there is a bug that is already fixed. Bug: When position changed, first line of lyrics was marked as previous.*
+*I just don't want to make screenshot again :P*
 ![Robin Hustin x Tobimorrow - Light it Up (NCS)](https://github.com/Eimaen/ConsoleMusix/blob/master/Screenshot.png)
 
 ## TODO
-* Fix / Make Discord Party Join to listen together w/ friends
+* ~Make~ Fix Discord party join to listen together with friends
 * Try to fasten console I/O
-* Redesign of controls
+* Redesign of controls *(btw they look like shit now)*
 * Save `.lyrlib` files automatically when lyrics from Musixmatch recieved
+* Clean up
+* Add more settings
+* TV streaming support *(probably DLNA)*
+* Add DirectX hooking to visualize music in-game *(or use overlay)*
 
-I'm glad to see you here. If you have any **ideas** or **suggestions** about the project, open a new issue and describe them.
+## Disclaimer
+Musixmatch API is unofficial and **is stolen** from original Musixmatch app for PC. Currently it uses my Musixmatch user-token.
+Of course I don't know if downloading from Soundcloud is a legal thing.
+I published it just **for educational purposes**.
+
+#### Your CPU must be fast enough to render console visualization and prevent FPS drops. 
+
+All the libraries used in this project are open-source, this app can be also built for Linux *(probably I guess)*.  
+If you have any **ideas** or **suggestions** about the project, open a new issue and describe them.

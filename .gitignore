@@ -3,3 +3,6 @@
 ################################################################################
 
 /ConsoleVisualizer/bin/Debug
+/ConsoleVisualizer/obj/Debug
+/.vs
+/packages

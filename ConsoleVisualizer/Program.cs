@@ -457,13 +457,6 @@ namespace ConsoleVisualizer
                             if (!LyricsUpdateNeeded)
                             {
                                 Console.Write(" " + Lyrics.LyricsTimecodes[key]);
-                                if (Musixmatch)
-                                {
-                                    Console.SetCursorPosition(Console.WindowWidth - 1 - "Musixmatch Unofficial API".Length, 3);
-                                    Console.ForegroundColor = ConsoleColor.Red;
-                                    Console.Write("Musixmatch Unofficial API");
-                                    Console.ForegroundColor = ConsoleColor.Gray;
-                                }
                                 Console.SetCursorPosition(0, Console.WindowHeight - size.Height - 2);
                             }
                             LyricsUpdateNeeded = false;
@@ -509,7 +502,7 @@ namespace ConsoleVisualizer
                     {
                         Console.SetCursorPosition(leftPos, 3);
                         Console.ForegroundColor = ConsoleColor.White;
-                        Console.Write("          ");
+                        Console.Write("          "); // Ahahahah lol wtf maaan nice clear :P
                         Console.SetCursorPosition(leftPos, 3);
                         Console.Write(" (" + Math.Truncate(Math.Abs(Lyrics.GetNextTimecodeByTime(span.Add(TimeSpan.FromMilliseconds(50))).TotalMilliseconds - span.TotalMilliseconds)) + "ms)");
                     }
@@ -679,8 +672,7 @@ namespace ConsoleVisualizer
             "Download from SoundCloud",
             "Download from YouTube",
             "Musixmatch Unofficial API: ON",
-            "Save Lyrlib Files: OFF",
-            "Open ♂Right♂ Form"
+            "Save Lyrlib Files: OFF"
         };
         static int SelectedMenuItem = 0;
 
@@ -690,7 +682,7 @@ namespace ConsoleVisualizer
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("Downloading from SoundCloud is possible thanks to him: https://github.com/InsaneSlay");
             Console.ForegroundColor = ConsoleColor.Gray;
-            Console.Write("Paste SoundCloud song link (right-click): ");
+            Console.Write("Paste SoundCloud song link: ");
             var link = Console.ReadLine();
             Directory.CreateDirectory("soundcloud");
             MessageBox.Show("Join Secret Debug", link.Replace("https://soundcloud.com/", "_SC__"));
@@ -724,7 +716,7 @@ namespace ConsoleVisualizer
         static void DrawYouTube()
         {
             Console.Clear();
-            Console.Write("Paste YouTube link (right-click): ");
+            Console.Write("Paste YouTube link: ");
             var link = Console.ReadLine();
             OpenFileAndPlay(DownloadYTSong(link, "youtube"));
         }

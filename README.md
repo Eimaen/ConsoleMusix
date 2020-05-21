@@ -16,6 +16,7 @@ ConsoleMusix currently supports:
 ![Robin Hustin x Tobimorrow - Light it Up (NCS)](https://github.com/Eimaen/ConsoleMusix/blob/master/Screenshot.png)
 
 ## TODO
+* Playlists!
 * ~Make~ Fix Discord party join to listen together with friends
 * Try to fasten console I/O
 * Redesign of controls *(btw they look like shit now)*

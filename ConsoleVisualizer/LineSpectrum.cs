@@ -14,6 +14,7 @@ namespace WinformsVisualization.Visualization
         private double _barSpacing;
         private double _barWidth;
         private Size _currentSize;
+        public Bitmap Bitmap;
 
         public LineSpectrum(FftSize fftSize)
         {
@@ -89,16 +90,21 @@ namespace WinformsVisualization.Visualization
             //prepare the fft result for rendering 
             SpectrumPointData[] spectrumPoints = CalculateSpectrumPoints(height, fftBuffer);
 
+            Bitmap = new Bitmap(size.Width * 10, size.Height * 10);
+            Graphics graphics = Graphics.FromImage(Bitmap);
+            graphics.Clear(Color.Black);
+
             //connect the calculated points with lines
             for (int i = 0; i < spectrumPoints.Length; i++)
             {
                 SpectrumPointData p = spectrumPoints[i];
                 int barIndex = p.SpectrumPointIndex;
-                double xCoord = BarSpacing * (barIndex + 1) + (_barWidth * barIndex) + _barWidth / 2;
+                double xCoord = (barIndex + 1) + ((Bitmap.Size.Width / spectrumPoints.Length - 1) * barIndex) + (Bitmap.Size.Width / spectrumPoints.Length - 1) / 2;
 
-                var p1 = new PointF((float) xCoord, height);
-                var p2 = new PointF((float) xCoord, height - (float) p.Value - 1);
+                var p1 = new PointF((float) xCoord, height * 10);
+                var p2 = new PointF((float) xCoord, height * 10 - (float) p.Value * 10 - 1);
 
+                graphics.DrawLine(new Pen(new SolidBrush(Color.White), (Bitmap.Size.Width / spectrumPoints.Length - 1)), p1, p2);
                 result.Add(height - (int)p.Value - 1);
             }
 

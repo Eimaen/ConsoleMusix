@@ -408,13 +408,25 @@ namespace SCDownload
                 doc.LoadHtml(t);
                 string id = doc.DocumentNode.SelectSingleNode("//meta[@property='twitter:app:url:googleplay']").Attributes["content"].Value.Replace("soundcloud://sounds:", "");
                 SCJson json = JsonConvert.DeserializeObject<SCJson>(new WebClient().DownloadString("https://api.soundcloud.com/tracks/" + id + ".json?client_id=" + clientID));
+                if (File.Exists(Path.Combine(path, $"{json.user.username} - {json.title}.mp3")))
+                    File.Delete(Path.Combine(path, $"{json.user.username} - {json.title}.mp3"));
                 new WebClient().DownloadFile($"{json.stream_url}?client_id={clientID}", Path.Combine(path, $"{json.user.username} - {json.title}.mp3"));
                 dir = Path.Combine(path, $"{Guid.NewGuid().ToString()}.jpg");
                 TagLib.File file = TagLib.File.Create(Path.Combine(path, $"{json.user.username} - {json.title}.mp3"));
-                file.Tag.Title = json.title.Substring(json.title.IndexOf(" - ") + 3);
-                file.Tag.Performers = new[] { json.title.Substring(0, json.title.IndexOf(" - ")) };
-                file.Tag.Album = file.Tag.Title + " - Single";
-                file.Save();
+                try
+                {
+                    file.Tag.Title = json.title.Substring(json.title.IndexOf(" - ") + 3);
+                    file.Tag.Performers = new[] { json.title.Substring(0, json.title.IndexOf(" - ")) };
+                    file.Tag.Album = file.Tag.Title + " - Single";
+                    file.Save();
+                }
+                catch 
+                {
+                    file.Tag.Title = json.title;
+                    file.Tag.Performers = new[] { json.user.username };
+                    file.Tag.Album = file.Tag.Title + " - Single";
+                    file.Save();
+                }
                 return Path.Combine(path, $"{json.user.username} - {json.title}.mp3");
             }
             catch (Exception ex)

@@ -574,7 +574,14 @@ namespace ConsoleVisualizer
                 if (!IsOutputBusy)
                     Console.WriteLine();
             }
-            RightForm.RedrawImage(_lineSpectrum.Bitmap);
+            Bitmap bitmap = _lineSpectrum.Bitmap;
+            Graphics graphics = Graphics.FromImage(bitmap);
+            StringFormat sf = new StringFormat();
+            sf.LineAlignment = StringAlignment.Center;
+            sf.Alignment = StringAlignment.Center;
+            if (LastLyric != new TimeSpan())
+                graphics.DrawString(Lyrics.LyricsTimecodes[LastLyric], new Font("Arial", 32, FontStyle.Italic), Brushes.Gray, new Rectangle(0, 0, bitmap.Width, bitmap.Height), sf);
+            RightForm.RedrawImage(bitmap);
             Application.DoEvents();
         }
 
@@ -604,6 +611,8 @@ namespace ConsoleVisualizer
 
         public static void OpenFileAndPlay(string file = "", string joinSecret = "")
         {
+            Application.EnableVisualStyles();
+            RightForm.Show();
             Console.Clear();
             if (file != "")
                 OpenFileToPlay(file);
@@ -823,8 +832,7 @@ namespace ConsoleVisualizer
                             }
                             if (SelectedMenuItem == 5)
                             {
-                                Application.EnableVisualStyles();
-                                RightForm.Show();
+                                
                             }
                         }
                         if (key.Key == ConsoleKey.DownArrow)

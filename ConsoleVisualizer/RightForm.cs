@@ -16,22 +16,14 @@ namespace ConsoleVisualizer
         public RightForm()
         {
             InitializeComponent();
+            TopMost = true;
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            Program.OnJoinDebug(textBox1.Text);
-        }
+
         public void RedrawImage(Image image)
         {
             pictureBox1.Image = image;
-            image.Save("image.png");
             Debug.WriteLine("OK: " + image.ToString());
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            Program.OpenFileAndPlay();
         }
     }
 }

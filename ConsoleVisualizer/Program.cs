@@ -290,6 +290,7 @@ namespace ConsoleVisualizer
 
         private static void OpenFileToPlay(string filename = "")
         {
+            LastLyric = new TimeSpan();
             ConsoleListener.Start();
             var openFileDialog = new OpenFileDialog()
             {
@@ -576,11 +577,27 @@ namespace ConsoleVisualizer
             }
             Bitmap bitmap = _lineSpectrum.Bitmap;
             Graphics graphics = Graphics.FromImage(bitmap);
-            StringFormat sf = new StringFormat();
-            sf.LineAlignment = StringAlignment.Center;
-            sf.Alignment = StringAlignment.Center;
+            
             if (LastLyric != new TimeSpan())
-                graphics.DrawString(Lyrics.LyricsTimecodes[LastLyric], new Font("Arial", 32, FontStyle.Italic), Brushes.Gray, new Rectangle(0, 0, bitmap.Width, bitmap.Height), sf);
+            {
+                StringFormat sf = new StringFormat();
+                sf.LineAlignment = StringAlignment.Center;
+                sf.Alignment = StringAlignment.Center;
+                graphics.DrawString(Lyrics.LyricsTimecodes[LastLyric], new Font("Arial", 32, FontStyle.Italic), Brushes.Gray, new Rectangle(0, bitmap.Height / 2, bitmap.Width, bitmap.Height / 2), sf);
+            }
+            if (TagsExist && TaglibFile.Tag.Pictures.Length > 0)
+            {
+                var bin = (byte[])(TaglibFile.Tag.Pictures[0].Data.Data);
+                graphics.DrawImage(Image.FromStream(new MemoryStream(bin)).GetThumbnailImage(bitmap.Height / 2 - 5, bitmap.Height / 2 - 5, null, IntPtr.Zero), new Rectangle(5, 5, bitmap.Height / 2, bitmap.Height / 2));
+            }
+            if (TagsExist)
+            {
+                StringFormat sf = new StringFormat();
+                sf.LineAlignment = StringAlignment.Near;
+                sf.Alignment = StringAlignment.Near;
+                graphics.DrawString(Lyrics.Name, new Font("Arial", 32, FontStyle.Regular), Brushes.White, new Rectangle(bitmap.Height / 2, 0, bitmap.Width / 2, 56), sf);
+                graphics.DrawString(Lyrics.Artist, new Font("Arial", 16, FontStyle.Regular), Brushes.White, new Rectangle(bitmap.Height / 2 + 4, 48, bitmap.Width, 32), sf);
+            }
             RightForm.RedrawImage(bitmap);
             Application.DoEvents();
         }

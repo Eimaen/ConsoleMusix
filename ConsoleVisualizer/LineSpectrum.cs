@@ -90,7 +90,7 @@ namespace WinformsVisualization.Visualization
             //prepare the fft result for rendering 
             SpectrumPointData[] spectrumPoints = CalculateSpectrumPoints(height, fftBuffer);
 
-            Bitmap = new Bitmap(size.Width * 10, size.Height * 10);
+            Bitmap = new Bitmap(size.Width * 10, size.Height * 40 + (size.Height * 40 / spectrumPoints.Length) - 1);
             Graphics graphics = Graphics.FromImage(Bitmap);
             graphics.Clear(Color.Black);
 
@@ -99,12 +99,12 @@ namespace WinformsVisualization.Visualization
             {
                 SpectrumPointData p = spectrumPoints[i];
                 int barIndex = p.SpectrumPointIndex;
-                double xCoord = (barIndex + 1) + ((Bitmap.Size.Width / spectrumPoints.Length - 1) * barIndex) + (Bitmap.Size.Width / spectrumPoints.Length - 1) / 2;
+                double xCoord = barIndex + ((Bitmap.Size.Width / spectrumPoints.Length) * barIndex) + (Bitmap.Size.Width / spectrumPoints.Length) - 1;
 
-                var p1 = new PointF((float) xCoord, height * 10);
-                var p2 = new PointF((float) xCoord, height * 10 - (float) p.Value * 10 - 1);
+                var p1 = new PointF((float) xCoord, height * 40);
+                var p2 = new PointF((float) xCoord, Math.Abs(height * 40 - (float) p.Value * 20 + 9));
 
-                graphics.DrawLine(new Pen(new SolidBrush(Color.White), (Bitmap.Size.Width / spectrumPoints.Length - 1)), p1, p2);
+                graphics.DrawLine(new Pen(new SolidBrush(Color.White), (Bitmap.Size.Width / spectrumPoints.Length) - 1), p1, p2);
                 result.Add(height - (int)p.Value - 1);
             }
 

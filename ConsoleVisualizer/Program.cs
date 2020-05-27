@@ -28,6 +28,7 @@ using WinformsVisualization.Visualization;
 namespace ConsoleVisualizer
 {
     using System;
+    using System.Resources;
     using System.Runtime.InteropServices;
     using static ConsoleVisualizer.NativeMethods;
 
@@ -590,7 +591,12 @@ namespace ConsoleVisualizer
                 var bin = (byte[])(TaglibFile.Tag.Pictures[0].Data.Data);
                 graphics.DrawImage(Image.FromStream(new MemoryStream(bin)).GetThumbnailImage(bitmap.Height / 2 - 5, bitmap.Height / 2 - 5, null, IntPtr.Zero), new Rectangle(5, 5, bitmap.Height / 2, bitmap.Height / 2));
             }
-            if (TagsExist)
+            else
+            {
+                Bitmap myImage = (Bitmap)Resources.ResourceManager.GetObject("MissingArt");
+                graphics.DrawImage(myImage, new Rectangle(5, 5, bitmap.Height / 2, bitmap.Height / 2));
+            }
+            if (TagsExist || LyricsExist)
             {
                 StringFormat sf = new StringFormat();
                 sf.LineAlignment = StringAlignment.Near;

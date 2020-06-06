@@ -11,6 +11,7 @@ namespace ConsoleVisualizer
 {
     // Get music lyrics using Musixmatch desktop app protocol
     // I guess it will never be fixed.
+    // It`s much better to say that it is a lifeHack, not a hack :)
     static class MusixmatchHack
     {
         public static string Get(string uri, CookieCollection cookie = null)

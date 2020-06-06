@@ -27,8 +27,7 @@ ConsoleMusix currently supports:
 * Add DirectX hooking to visualize music in-game *(or use overlay)*
 
 ## Disclaimer
-Musixmatch API is unofficial and **is stolen** from original Musixmatch app for PC. Currently it uses my Musixmatch user-token.
-Of course I don't know if downloading from Soundcloud is a legal thing.
+Musixmatch API is unofficial and **is taken** from original Musixmatch app for PC. Musixmatch user token can be extracted from desktop app *(Maybe there is another way)*.
 I published it just **for educational purposes**.
 
 ## Known bugs

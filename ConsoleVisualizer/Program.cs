@@ -326,7 +326,7 @@ namespace ConsoleVisualizer
             if (EnableMusixmatchHack && !LyricsExist)
             {
                 Console.WriteLine("\n Searching Musixmatch for lyrics, stay patient!");
-                var lyricsMH = MusixmatchHack.SearchLyrics(TaglibFile.Tag.Title, TaglibFile.Tag.FirstPerformer, "200415fd8f532190e7bdca0aaa418b3771eb24ba79b0a99a7e5ac5");
+                var lyricsMH = MusixmatchHack.SearchLyrics(TaglibFile.Tag.Title, TaglibFile.Tag.FirstPerformer, "");
                 if (lyricsMH != null)
                 {
                     Musixmatch = true;

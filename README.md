@@ -1,5 +1,5 @@
 # ConsoleMusix
-Full-featured console-based media player. The project is under development and is sometimes updated. This app was originally intended for personal use.
+Console-based media player. The project is under development and is sometimes updated. This app was originally intended for personal use.
 
 ## Features
 ConsoleMusix currently supports:
@@ -38,4 +38,3 @@ I published it just **for educational purposes**.
 #### Your CPU must be fast enough to render console visualization and prevent FPS drops. 
 
 All the libraries used in this project are open-source, this app can be also built for Linux *(probably I guess)*.  
-If you have any **ideas** or **suggestions** about the project, open a new issue and describe them.

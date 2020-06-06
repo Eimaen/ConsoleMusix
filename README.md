@@ -35,5 +35,5 @@ I published it just **for educational purposes**.
 * Soundcloud download works good, but not always. Some songs aren't currently downloadable. For those ones you can use YouTube.
 
 #### Your CPU must be fast enough to render console visualization and prevent FPS drops. 
-
 All the libraries used in this project are open-source, this app can be also built for Linux *(probably I guess)*.  
+

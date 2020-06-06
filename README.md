@@ -32,7 +32,7 @@ I published it just **for educational purposes**.
 
 ## Known bugs
 * When the second song per launch is opened and it contains lyrics, program returns to the main menu loop, but doesn't dispose `SoundOutput`. It makes it kinda stuck.
-* Soundcloud download works good, but not always. Some songs aren't currently downloadable. For those ones you can use YouTube.
+* Soundcloud download works good, but not always. Some songs aren't currently downloadable. For those ones you can use YouTube *(pre-releases currently don't support YT download)*.
 
 #### Your CPU must be fast enough to render console visualization and prevent FPS drops. 
 All the libraries used in this project are open-source, this app can be also built for Linux *(probably I guess)*.  

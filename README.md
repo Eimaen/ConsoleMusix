@@ -1,5 +1,5 @@
 # ConsoleMusix
-Full-featured console-based media player. The project is under development and is sometimes updated. This app was originally intended for personal use.
+Console-based media player. The project is under development and is sometimes updated. This app was originally intended for personal use.
 
 ## Features
 ConsoleMusix currently supports:
@@ -27,15 +27,13 @@ ConsoleMusix currently supports:
 * Add DirectX hooking to visualize music in-game *(or use overlay)*
 
 ## Disclaimer
-Musixmatch API is unofficial and **is stolen** from original Musixmatch app for PC. Currently it uses my Musixmatch user-token.
-Of course I don't know if downloading from Soundcloud is a legal thing.
+Musixmatch API is unofficial and **is taken** from original Musixmatch app for PC. Musixmatch user token can be extracted from desktop app *(Maybe there is another way)*.
 I published it just **for educational purposes**.
 
 ## Known bugs
 * When the second song per launch is opened and it contains lyrics, program returns to the main menu loop, but doesn't dispose `SoundOutput`. It makes it kinda stuck.
-* Soundcloud download works good, but not always. Some songs aren't currently downloadable. For those ones you can use YouTube.
+* Soundcloud download works good, but not always. Some songs aren't currently downloadable. For those ones you can use YouTube *(pre-releases currently don't support YT download)*.
 
 #### Your CPU must be fast enough to render console visualization and prevent FPS drops. 
-
 All the libraries used in this project are open-source, this app can be also built for Linux *(probably I guess)*.  
-If you have any **ideas** or **suggestions** about the project, open a new issue and describe them.
+

@@ -1,4 +1,4 @@
-﻿using CSCore;
+using CSCore;
 using CSCore.Codecs;
 using CSCore.DSP;
 using CSCore.SoundIn;

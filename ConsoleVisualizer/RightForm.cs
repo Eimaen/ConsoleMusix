@@ -23,7 +23,7 @@ namespace ConsoleVisualizer
         public void RedrawImage(Image image)
         {
             pictureBox1.Image = image;
-            Debug.WriteLine("OK: " + image.ToString());
+            //Debug.WriteLine("OK: " + image.ToString());
         }
     }
 }

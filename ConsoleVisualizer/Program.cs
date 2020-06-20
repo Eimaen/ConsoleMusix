@@ -317,28 +317,41 @@ namespace ConsoleVisualizer
             _soundOut = new WasapiOut();
             _soundOut.Initialize(_source);
 
-            if (File.Exists(Path.Combine(new FileInfo(filename).DirectoryName, new FileInfo(filename).Name.Replace(".mp3", "") + ".lyrlib")))
-                LyricsExist = Lyrics.TryLoadFromFile(Path.Combine(new FileInfo(filename).DirectoryName, new FileInfo(filename).Name.Replace(".mp3", "") + ".lyrlib"));
+            FileInfo info = new FileInfo(filename);
+
+            if (File.Exists(Path.Combine(info.DirectoryName, info.Name.Replace(".mp3", "") + ".lyrlib")))
+                LyricsExist = Lyrics.TryLoadFromFile(Path.Combine(info.DirectoryName, info.Name.Replace(".mp3", "") + ".lyrlib"));
             Filename = filename;
             TaglibFile = TagLib.File.Create(Filename);
             if (TaglibFile.Tag.Title != null && TaglibFile.Tag.Title != "")
                 TagsExist = true;
+            else
+            {
+                var file_ = info.Name.Replace(info.Extension, "");
+                if (file_.Contains(" - ")) // ex. KDrew - Sometimes
+                {
+                    TaglibFile.Tag.Title = file_.Substring(file_.IndexOf(" - ") + 3);
+                    TaglibFile.Tag.Performers = new[] { file_.Substring(0, file_.IndexOf(" - ")) };
+                    TaglibFile.Tag.Album = TaglibFile.Tag.Title + " - Single";
+                    TagsExist = true;
+                }
+            }
             if (EnableMusixmatchHack && !LyricsExist)
             {
-                Console.WriteLine("\n Searching Musixmatch for lyrics, stay patient!");
-                var lyricsMH = MusixmatchHack.SearchLyrics(TaglibFile.Tag.Title, TaglibFile.Tag.FirstPerformer, "200415fd8f532190e7bdca0aaa418b3771eb24ba79b0a99a7e5ac5");
-                if (lyricsMH != null)
-                {
-                    Musixmatch = true;
-                    Lyrics = new LyrLibMusicLyrics();
-                    foreach (var lyricsLine in lyricsMH)
-                    {
-                        if (lyricsLine.Text == "")
-                            continue;
-                        Lyrics.AddLyricEntry(TimeSpan.FromSeconds(lyricsLine.Time.Total), lyricsLine.Text);
-                    }
-                    Lyrics.Name = TaglibFile.Tag.Title;
-                    Lyrics.Artist = TaglibFile.Tag.FirstPerformer;
+                Console.WriteLine("\n Searching Musixmatch for lyrics, stay patient!");                                       // Here comes your UserToken from MusixMatch
+                var lyricsMH = MusixmatchHack.SearchLyrics(TaglibFile.Tag.Title, TaglibFile.Tag.FirstPerformer, "UserToken"); // It can not be randomly typed (I guess)
+                if (lyricsMH != null)                                                                                         // But you may try to
+                {                                                                                                             // To get this token go to MusixMatch app (Microsoft Store)
+                    Musixmatch = true;                                                                                        // Ctrl + Shift + I, select network tab
+                    Lyrics = new LyrLibMusicLyrics();                                                                         // Make sure that circle on the top-left is red
+                    foreach (var lyricsLine in lyricsMH)                                                                      // Then start your music in Spotify or iTunes
+                    {                                                                                                         // When song lyrics are ready, go back to the
+                        if (lyricsLine.Text == "")                                                                            // Network tab and click on record, which contains
+                            continue;                                                                                         // "macro.subtitles.get" or something. Copy the
+                        Lyrics.AddLyricEntry(TimeSpan.FromSeconds(lyricsLine.Time.Total), lyricsLine.Text);                   // link, in this link there will be a GET parameter 
+                    }                                                                                                         // called "usertoken". Copy everything between
+                    Lyrics.Name = TaglibFile.Tag.Title;                                                                       // "usertoken=" and "&". Aww... I guess it has to
+                    Lyrics.Artist = TaglibFile.Tag.FirstPerformer;                                                            // be in wiki tab. Sorry ;)
                     Lyrics.Album = TaglibFile.Tag.Album;
                     LyricsExist = true;
                     if (SaveLyrlibFiles)
@@ -576,9 +589,9 @@ namespace ConsoleVisualizer
                 if (!IsOutputBusy)
                     Console.WriteLine();
             }
+            /* BITMAP GENERATION FOR TVs
             Bitmap bitmap = _lineSpectrum.Bitmap;
             Graphics graphics = Graphics.FromImage(bitmap);
-            
             if (LastLyric != new TimeSpan())
             {
                 StringFormat sf = new StringFormat();
@@ -606,6 +619,7 @@ namespace ConsoleVisualizer
             }
             RightForm.RedrawImage(bitmap);
             Application.DoEvents();
+            */
         }
 
         static bool IsKeyPressed(Key key)
@@ -634,8 +648,8 @@ namespace ConsoleVisualizer
 
         public static void OpenFileAndPlay(string file = "", string joinSecret = "")
         {
-            Application.EnableVisualStyles();
-            RightForm.Show();
+            /*Application.EnableVisualStyles();
+            RightForm.Show();*/
             Console.Clear();
             if (file != "")
                 OpenFileToPlay(file);
@@ -779,7 +793,6 @@ namespace ConsoleVisualizer
             Console.BufferHeight = 25;
             Console.Clear();
             Console.Title = "ConsoleMusix v1.59";
-            Console.OutputEncoding = Encoding.UTF8;
         }
 
         [STAThread]
@@ -855,7 +868,7 @@ namespace ConsoleVisualizer
                             }
                             if (SelectedMenuItem == 5)
                             {
-                                
+
                             }
                         }
                         if (key.Key == ConsoleKey.DownArrow)
@@ -959,7 +972,7 @@ namespace ConsoleVisualizer
         #endregion
 
         #region Join / Spectate feature
-        
+
         private static void OnSpectate(object sender, SpectateMessage args)
         {   /*
 			 * This is called when the Discord Client wants to join a online game to watch and spectate.

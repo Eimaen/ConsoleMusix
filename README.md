@@ -15,17 +15,6 @@ ConsoleMusix currently supports:
 *I just don't want to make screenshot again :P*
 ![Robin Hustin x Tobimorrow - Light it Up (NCS)](https://github.com/Eimaen/ConsoleMusix/blob/master/Screenshot.png)
 
-## TODO
-* Playlists!
-* ~Make~ Fix Discord party join to listen together with friends
-* Try to fasten console I/O
-* Redesign of controls *(btw they look like shit now)*
-* Save `.lyrlib` files automatically when lyrics from Musixmatch recieved
-* Clean up
-* Add more settings
-* TV streaming support *(probably DLNA)*
-* Add DirectX hooking to visualize music in-game *(or use overlay)*
-
 ## Disclaimer
 Musixmatch API is unofficial and **is taken** from original Musixmatch app for PC. Musixmatch user token can be extracted from desktop app *(Maybe there is another way)*.
 I published it just **for educational purposes**.
